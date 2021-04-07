@@ -47,6 +47,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         public long? TransactionId { get; set; }
 
         [ForeignKey(nameof(TransactionId))]
+        [InverseProperty("Users")]
         public virtual Transaction Transaction { get; set; }
         [InverseProperty(nameof(Country.User))]
         public virtual ICollection<Country> Countries { get; set; }
@@ -62,6 +63,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         public virtual ICollection<Sale> Sales { get; set; }
         [InverseProperty(nameof(SalesChannel.User))]
         public virtual ICollection<SalesChannel> SalesChannels { get; set; }
+        [InverseProperty("User")]
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

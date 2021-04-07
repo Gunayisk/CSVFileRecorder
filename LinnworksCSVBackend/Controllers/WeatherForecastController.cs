@@ -66,7 +66,7 @@ namespace LinnworksCSVBackend.Controllers
                         {
                             Sale sale = new Sale
                             {
-                               OrderPriority = rows[5],
+                               OrderPriority = rows[4],
                               
                             };
                             SaveRequest<Sale> request = new Common.Requests.SaveRequest<Sale>()

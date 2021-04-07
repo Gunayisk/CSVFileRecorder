@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LinnworksCSVBackend.LinnworksAppModels
 {
+    [Table("Transaction")]
     public partial class Transaction
     {
         public Transaction()
@@ -35,6 +36,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         public DateTime? UpdateDate { get; set; }
 
         [ForeignKey(nameof(UserId))]
+        [InverseProperty("Transactions")]
         public virtual User User { get; set; }
         [InverseProperty(nameof(Country.Transaction))]
         public virtual ICollection<Country> Countries { get; set; }
@@ -50,7 +52,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         public virtual ICollection<Sale> Sales { get; set; }
         [InverseProperty(nameof(SalesChannel.Transaction))]
         public virtual ICollection<SalesChannel> SalesChannels { get; set; }
-
+        [InverseProperty("Transaction")]
         public virtual ICollection<User> Users { get; set; }
     }
 }
