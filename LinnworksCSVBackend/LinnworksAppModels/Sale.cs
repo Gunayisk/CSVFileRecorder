@@ -28,10 +28,12 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         [Column("order_priority")]
         [StringLength(1)]
         public string OrderPriority { get; set; }
-        [Column("order_date", TypeName = "datetime")]
-        public DateTime? OrderDate { get; set; }
-        [Column("ship_date", TypeName = "datetime")]
-        public DateTime? ShipDate { get; set; }
+        [Column("order_date")]
+        [StringLength(50)]
+        public string OrderDate { get; set; }
+        [Column("ship_date")]
+        [StringLength(50)]
+        public string ShipDate { get; set; }
         [Column("units_sold")]
         public int? UnitsSold { get; set; }
         [Column("unit_price")]
@@ -39,11 +41,14 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         [Column("unit_cost")]
         public int? UnitCost { get; set; }
         [Column("total_revenue")]
-        public long? TotalRevenue { get; set; }
+        [StringLength(50)]
+        public string TotalRevenue { get; set; }
         [Column("total_coast")]
-        public long? TotalCoast { get; set; }
+        [StringLength(50)]
+        public string TotalCoast { get; set; }
         [Column("total_profit")]
-        public long? TotalProfit { get; set; }
+        [StringLength(50)]
+        public string TotalProfit { get; set; }
         [Column("create_date", TypeName = "datetime")]
         public DateTime? CreateDate { get; set; }
         [Column("update_date", TypeName = "datetime")]
@@ -58,6 +63,9 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         [ForeignKey(nameof(RegionId))]
         [InverseProperty("Sales")]
         public virtual Region Region { get; set; }
+        [ForeignKey(nameof(SalesChannelId))]
+        [InverseProperty("Sales")]
+        public virtual SalesChannel SalesChannel { get; set; }
         [ForeignKey(nameof(TransactionId))]
         [InverseProperty("Sales")]
         public virtual Transaction Transaction { get; set; }

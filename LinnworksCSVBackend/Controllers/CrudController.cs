@@ -21,9 +21,9 @@ namespace LinnworksCSVBackend.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult Store([FromBody]SaveRequest<TEntity> request)
+        public virtual async Task<JsonResult> Store([FromBody]SaveRequest<TEntity> request)
         {
-            var response = _genericService.Add(request);
+            var response = await _genericService.AddAsync(request);
             return Json(new { response });
         }
     }

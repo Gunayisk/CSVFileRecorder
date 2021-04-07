@@ -26,18 +26,19 @@ namespace LinnworksCSVBackend.Services
             //accessor = _accessor;
         }
 
-        public SaveResponse<TEntity> Add(SaveRequest<TEntity> request)
+        public async Task<SaveResponse<TEntity>> AddAsync(SaveRequest<TEntity> request)
         {
+            var userId = Guid.NewGuid();
             
             var entity = request.Data;
             var transactionId = TransactionHelper.GetTransactionId();
             AddParamValueEntity(entity, "CreateDate", DateTime.Now);
-            AddParamValueEntity(entity, "UserId", Guid.NewGuid());
+            //AddParamValueEntity(entity, "UserId", userId);
             AddParamValueEntity(entity, "TransactionId", transactionId);
-            DBSet.Add(entity);
+            await DBSet.AddAsync(entity);
 
             {
-                Context.SaveChanges();
+               await Context.SaveChangesAsync();
             }
 
             return new SaveResponse<TEntity>();

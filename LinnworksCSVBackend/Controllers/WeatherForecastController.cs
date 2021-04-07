@@ -49,7 +49,7 @@ namespace LinnworksCSVBackend.Controllers
         [HttpPost]
         [Route("FileUpload")]
         [RequestSizeLimit(737280000)]
-        public IEnumerable<Sale> FileUpload([FromForm]IFormFile file)
+        public async Task<IEnumerable<Sale>> FileUpload([FromForm]IFormFile file)
         {
             List<Sale> sales = new List<Sale>();
             if (file.FileName.EndsWith(".csv"))
@@ -67,13 +67,16 @@ namespace LinnworksCSVBackend.Controllers
                             Sale sale = new Sale
                             {
                                OrderPriority = rows[4],
+                               OrderDate = rows[5],
+                               ShipDate = rows[7]
+                              
                               
                             };
                             SaveRequest<Sale> request = new Common.Requests.SaveRequest<Sale>()
                             {
                                 Data = sale
                             };
-                            var response = _saleService.Add(request);
+                            var response = await _saleService.AddAsync(request);
                         }
                         
                     }

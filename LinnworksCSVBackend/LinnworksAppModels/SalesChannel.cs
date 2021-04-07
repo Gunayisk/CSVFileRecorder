@@ -12,6 +12,11 @@ namespace LinnworksCSVBackend.LinnworksAppModels
     [Index(nameof(Id), Name = "IX_SalesChannel")]
     public partial class SalesChannel
     {
+        public SalesChannel()
+        {
+            Sales = new HashSet<Sale>();
+        }
+
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -33,5 +38,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
         [ForeignKey(nameof(UserId))]
         [InverseProperty("SalesChannels")]
         public virtual User User { get; set; }
+        [InverseProperty(nameof(Sale.SalesChannel))]
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }

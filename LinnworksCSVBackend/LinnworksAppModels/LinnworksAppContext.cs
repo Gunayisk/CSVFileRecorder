@@ -131,6 +131,11 @@ namespace LinnworksCSVBackend.LinnworksAppModels
                     .HasForeignKey(d => d.RegionId)
                     .HasConstraintName("FK_Sales_Regions");
 
+                entity.HasOne(d => d.SalesChannel)
+                    .WithMany(p => p.Sales)
+                    .HasForeignKey(d => d.SalesChannelId)
+                    .HasConstraintName("FK_Sales_SalesChannel");
+
                 entity.HasOne(d => d.Transaction)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.TransactionId)
@@ -139,7 +144,7 @@ namespace LinnworksCSVBackend.LinnworksAppModels
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_Sales_SalesChannel");
+                    .HasConstraintName("FK_Sales_Users");
             });
 
             modelBuilder.Entity<SalesChannel>(entity =>

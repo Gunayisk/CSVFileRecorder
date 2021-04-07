@@ -11,7 +11,7 @@ namespace LinnworksCSVBackend.Services.Interfaces
     {
         ListResponse<TEntity> List(ListRequest request);
         GetResponse<TEntity> GetById(GetRequest request);
-        SaveResponse<TEntity> Add(SaveRequest<TEntity> request);
+        Task<SaveResponse<TEntity>> AddAsync(SaveRequest<TEntity> request);
         SaveResponse<TEntity> Update(SaveRequest<TEntity> request);
         DeleteResponse<TEntity> Delete(DeleteRequest request);
     }
